@@ -3,7 +3,7 @@ import "./App.css";
 import GetSmurfs from "./GetSmurfs";
 import PostSmurfs from "./PostSmurfs";
 
-export default function App() {
+const App = () => {
   return (
     <div className="App">
       <GetSmurfs />
@@ -11,4 +11,6 @@ export default function App() {
     </div>
   );
 }
+
+export default App;
 
