@@ -1,8 +1,9 @@
-import React, { useState } from "react"
-import { useForm } from "react-hook-form"
-import axios from "axios";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import {connect} from "react-redux";
+import {postSmurfs} from '../actions';
 
-const PostSmurfs = () => {
+const PostSmurfs = (props) => {
     
     const [smurf, setSmurf] = useState({
         name: '',
@@ -12,15 +13,9 @@ const PostSmurfs = () => {
 
     const { register, handleSubmit } = useForm();
 
-    const onSubmit = (data, e) => {
-        e.preventDefault();
-        axios
-        .post('http://localhost:3333/smurfs', data)
-        .then(res => {
-            console.log('response', res)
-        })
-        .catch(err => console.log('post req error', err))
-    }
+    const onSubmit = e => {
+        props.postSmurfs(smurf);     
+    } 
 
     const handleChanges = e => {
         setSmurf({...smurf, [e.target.name]: e.target.value})
@@ -54,4 +49,4 @@ const PostSmurfs = () => {
     )
 }
 
-export default PostSmurfs;
+export default connect(null, {postSmurfs})(PostSmurfs);
